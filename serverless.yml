@@ -1,0 +1,21 @@
+service:
+  name: serverless-sample-scaffold
+
+plugins:
+  - serverless-bundle
+  - serverless-pseudo-parameters
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  memorySize: 256
+  stage: ${opt:stage, 'dev'}
+  region: ap-south-1
+
+functions:
+  hello:
+    handler: src/handler.handler
+    events:
+      - http:
+          method: GET
+          path: /hello
