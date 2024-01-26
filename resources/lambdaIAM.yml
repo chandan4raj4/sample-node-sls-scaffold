@@ -1,0 +1,32 @@
+IamLambdaExecutionRole:
+  Type: AWS::IAM::Role
+  Properties:
+    Description: Custom role for lambda
+    RoleName: ${self:service}-${self:provider.stage}-${self:provider.region}-customLambdaRole
+    AssumeRolePolicyDocument:
+      Version: '2012-10-17'
+      Statement:
+        - Effect: Allow
+          Principal:
+            Service:
+              - lambda.amazonaws.com
+          Action: sts:AssumeRole
+    Policies:
+      - PolicyName: ${self:service}-${self:provider.stage}
+        PolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+            - Effect: Allow
+              Action:
+                - logs:CreateLogGroup
+                - logs:CreateLogStream
+                - logs:PutLogEvents
+              Resource: '*'
+            - Effect: Allow
+              Action:
+                - sqs:GetQueueAttributes
+                - sqs:ReceiveMessage
+                - sqs:DeleteMessage
+                - sqs:SendMessage
+                - sqs:ChangeMessageVisibility
+              Resource: !GetAtt SampleQueue.Arn

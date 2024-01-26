@@ -1,0 +1,4 @@
+SampleQueue:
+  Type: AWS::SQS::Queue
+  Properties:
+    QueueName: ${self:custom.sampleQueue.name}

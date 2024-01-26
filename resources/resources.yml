@@ -1,0 +1,3 @@
+Resources:
+  SampleQueue: ${file(resources/SampleQueue.yml):SampleQueue}
+  IamLambdaExecutionRole: ${file(resources/lambdaIAM.yml):IamLambdaExecutionRole}

@@ -1,21 +1,29 @@
-service:
-  name: serverless-sample-scaffold
+service: serverless-sqs-sample
 
 plugins:
   - serverless-bundle
-  - serverless-pseudo-parameters
 
 provider:
   name: aws
   runtime: nodejs18.x
   memorySize: 256
+  timeout: 6
   stage: ${opt:stage, 'dev'}
   region: ap-south-1
+  lambdaHashingVersion: 20201221
+  iam:
+    role: IamLambdaExecutionRole
 
 functions:
-  hello:
+  sqs-test:
     handler: src/handler.handler
     events:
-      - http:
-          method: GET
-          path: /hello
+      - sqs:
+          arn: !GetAtt SampleQueue.Arn
+          batchSize: 5
+
+custom:
+  sampleQueue:
+    name: SampleQueue-${self:provider.stage}
+
+resources: ${file(resources/resources.yml)}
