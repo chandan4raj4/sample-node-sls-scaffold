@@ -24,9 +24,9 @@ IamLambdaExecutionRole:
               Resource: '*'
             - Effect: Allow
               Action:
-                - sqs:GetQueueAttributes
-                - sqs:ReceiveMessage
-                - sqs:DeleteMessage
-                - sqs:SendMessage
-                - sqs:ChangeMessageVisibility
-              Resource: !GetAtt SampleQueue.Arn
+                - iam:passRole
+              Resource: '*' #or get the resource arn
+            - Effect: Allow
+              Action:
+                - scheduler:*
+              Resource: '*'

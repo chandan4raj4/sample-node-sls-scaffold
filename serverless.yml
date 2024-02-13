@@ -1,4 +1,4 @@
-service: serverless-sqs-sample
+service: serverless-scheduler-sample
 
 plugins:
   - serverless-bundle
@@ -15,15 +15,7 @@ provider:
     role: IamLambdaExecutionRole
 
 functions:
-  sqs-test:
+  scheduler-test:
     handler: src/handler.handler
-    events:
-      - sqs:
-          arn: !GetAtt SampleQueue.Arn
-          batchSize: 5
-
-custom:
-  sampleQueue:
-    name: SampleQueue-${self:provider.stage}
 
 resources: ${file(resources/resources.yml)}

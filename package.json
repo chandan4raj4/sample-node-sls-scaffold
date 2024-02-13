@@ -10,7 +10,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@aws-sdk/client-scheduler": "^3.503.1",
     "serverless-bundle": "^6.1.0",
-    "serverless-pseudo-parameters": "^2.6.1"
+    "uuid": "^9.0.1"
   }
 }
